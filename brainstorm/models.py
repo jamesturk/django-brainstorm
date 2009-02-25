@@ -8,10 +8,12 @@ import secretballot
 class Subsite(models.Model):
     slug = models.SlugField(max_length=50, primary_key=True)
     name = models.CharField(max_length=50)
+    description = models.TextField()
 
-    theme = models.CharField(max_length=100)
+    theme = models.CharField(help_text='name of base theme template', max_length=100)
 
     ideas_per_page = models.IntegerField(default=10)
+    allow_anonymous_ideas = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.name
