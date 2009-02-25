@@ -1,0 +1,39 @@
+{% extends subsite.theme %}
+{% load comments %}
+
+{% block content %}
+
+<div id="idea">
+    {% include "brainstorm/idea_vote.html" %}
+</div>
+
+{% get_comment_list for idea as comments %}
+<a name="comments"></a>
+<div id="comments">
+<h3>{{ comments|length }} Comments</h3>
+<ol>
+    {% for comment in comments %}
+    <a name="c{{comment.id}}"><li></a>
+        <div class="commentMeta">
+        <span class="commentMetaAuthor">
+            {% if comment.user_url %}<a href="{{comment.user_url}}">{% endif %}
+                {{comment.user_name}}
+            {% if comment.user_url %}</a>{% endif %}
+            </span>
+            <span class="commentMetaDate">{{comment.submit_date|date:"m/d P"}}</span>
+        </div>
+        <div class="commentContent">
+            <p>{{comment.comment|urlize}}</p>
+        </div>
+    </li>
+    {% endfor %}
+</ol>
+
+{% get_comment_form for idea as comment_form %}
+<form method="post" action="{% comment_form_target %}">
+    {{ comment_form.as_p }}
+    <button class="btnSubmit" type="submit">Submit</button>
+</form>
+</div>
+
+{% endblock content %}

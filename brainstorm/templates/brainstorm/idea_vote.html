@@ -1,0 +1,15 @@
+    {% if not idea.user_vote %}
+    <div class="btnVote">
+        <a class="vote_link" href="{% url vote_up idea.id %}">Vote</a>
+    {% else %}
+    <div class="btnVote voted">
+        <a class="vote_link" href="{% url unvote idea.id %}">Voted</a>
+    {% endif %}
+        <div class="votesCounted">{{idea.vote_total}} Votes</div>
+    </div>
+    <div class="voteContent">
+        <h3><a href="{{idea.get_absolute_url}}">{{idea.title}}</a></h3>
+        <div class="commentMeta">Submitted on {{idea.submit_date|date:"m/d P"}} by {{idea.user|default_if_none:"anonymous"}} (<a href="{{idea.get_absolute_url}}#comments">{{idea.comments.count}} comments</a>)</div>
+        
+        <p>{{idea.description|urlize}}</p>
+    </div>

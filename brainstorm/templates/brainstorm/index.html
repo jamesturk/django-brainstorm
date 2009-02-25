@@ -1,0 +1,23 @@
+{% extends subsite.theme %}
+
+{% block content %}
+<div id="ideas">
+    <ul>
+    {% for idea in ideas.object_list %}
+        <li>{% include "brainstorm/idea_vote.html" %}</li>
+    {% endfor %}
+    </ul>
+</div>
+<div id="pagination">
+    {% if ideas.has_previous %}
+        <a href="?page={{ideas.previous_page_number}}">previous</a>
+    {% endif %}
+
+    page {{ideas.number}} / {{ideas.paginator.num_pages}}
+
+    {% if ideas.has_next %}
+        <a href="?page={{ideas.next_page_number}}">next</a>
+    {% endif %}
+</div>
+{% endblock %}
+
