@@ -29,9 +29,24 @@
     {% endfor %}
 </ol>
 
-{% get_comment_form for idea as comment_form %}
-<form method="post" action="{% comment_form_target %}">
-    {{ comment_form.as_p }}
+<form method="post" action="{% url submit_idea_comment %}">
+    <input name="idea_id" type="hidden" value="{{idea.id}}" />
+    <p>
+        <label for="name">Name</label>
+        <input id="name" class="text" type="text" name="name" size="50"/>
+    </p>
+    <p>
+        <label for="email">Email</label>
+        <input id="email" class="text" type="text" name="email" size="50"/>
+    </p>
+    <p>
+        <label for="url">URL</label>
+        <input id="url" class="text" type="text" name="url" size="50"/>
+    </p>
+    <p id="commentForm">
+        <label for="comment">Comment</label>
+        <textarea class="textarea" name="comment" cols="48" rows="12"></textarea>
+    </p>
     <button class="btnSubmit" type="submit">Submit</button>
 </form>
 </div>

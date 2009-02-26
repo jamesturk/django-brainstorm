@@ -14,6 +14,7 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns('brainstorm.views',
+    url(r'^submit_comment/$', 'submit_comment', name='submit_idea_comment'),
     url(r'^(?P<slug>[\w-]+)/$', 'idea_list', {'ordering': 'most_popular'}, name='subsite'),
     url(r'^(?P<slug>[\w-]+)/latest/$', 'idea_list', {'ordering': 'latest'}, name='subsite_latest'),
     url(r'^(?P<slug>[\w-]+)/(?P<id>\d+)/$', 'idea_detail', name='idea'),
