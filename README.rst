@@ -1,8 +1,39 @@
+=================
+django-brainstorm
+=================
+
+Django app for creating a site with multiple areas to brainstorm ideas.
+
+This app powers http://feedback.sunlightfoundation.com/hackathon/ and http://feedback.sunlightfoundation.com/oogl/ and makes it easy to create any number of these 'subsites.'
+
+django-brainstorm is a project of Sunlight Labs (c) 2009.
+Written by James Turk <jturk@sunlightfoundation.com>.
+
+All code is under a BSD-style license, see LICENSE for details.
+
+Source: http://github.com/sunlightlabs/django-brainstorm/
 
 
----------------
+Requirements
+============
+
+python >= 2.4
+django >= 1.0
+
+Usage
+=====
+
+1. Add 'brainstorm' to your ``INSTALLED_APPS`` setting.
+2. Add a reference to ``brainstorm.urls`` somewhere in your urls.py::
+
+   (r'^', include('brainstorm.urls')),  # something that looks like this
+
+3. Login to the django admin and create a subsite.
+
+A subsite has a slug, name, description, theme, and a number of other options.  The important two are theme and slug, slug dictates where the subsite will live and theme specifies the name of a theme template (see `Creating Themes`_ for details)
+
 Creating Themes
----------------
+===============
 
 A theme is represented by a single django template, currently kept at templates/themes/themename.html
 
@@ -11,7 +42,8 @@ Required Elements
 
 The theme must include a content block that will be filled by the page, the theme should also include "idea_form.html" if you wish to use the generic idea submission form.
 
-Example dynamic content block:
+Example dynamic content block::
+
     <!-- content -->
     <div>
         <h2 id="secondLogo"><a href="http://mysite.com/subsite/">{{subsite.name}}</a></h2>
