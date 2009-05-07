@@ -28,7 +28,8 @@ def idea_list(request, slug, ordering='-total_upvotes'):
 
     return render_to_response('brainstorm/index.html',
                               {'subsite':subsite, 'ideas': ideas,
-                               'ordering': ordering},
+                               'ordering': ordering,
+                               'user_can_post': subsite.user_can_post(request.user)},
                               context_instance=RequestContext(request))
 
 def idea_detail(request, slug, id):
@@ -37,19 +38,21 @@ def idea_detail(request, slug, id):
                              subsite=slug, pk=id)
 
     return render_to_response('brainstorm/idea.html',
-                              {'subsite':subsite, 'idea': idea},
+                              {'subsite':subsite, 'idea': idea,
+                               'user_can_post': subsite.user_can_post(request.user)},
                               context_instance=RequestContext(request))
 
 @require_POST
 def new_idea(request, slug):
     subsite = get_object_or_404(Subsite, pk=slug)
+    if not subsite.user_can_post(request.user):
+        return HttpResponseRedirect(subsite.get_absolute_url())
     title = request.POST['title']
     description = request.POST['description']
     if request.user.is_anonymous():
         user = None
     else:
         user = request.user
-
     idea = Idea.objects.create(title=title, description=description,
                                user=user, subsite=subsite)
     return HttpResponseRedirect(idea.get_absolute_url())

@@ -5,6 +5,13 @@ from django.contrib.contenttypes import generic
 from django.contrib.comments.models import Comment
 import secretballot
 
+ALLOW_ALL, REQUIRE_LOGIN, DISALLOW_ALL = range(3)
+SUBSITE_POST_STATUS = (
+    (ALLOW_ALL, 'Allow All Posts'),
+    (REQUIRE_LOGIN, 'Require Login'),
+    (DISALLOW_ALL, 'Allow No Posts'),
+)
+
 class Subsite(models.Model):
     slug = models.SlugField(max_length=50, primary_key=True)
     name = models.CharField(max_length=50)
@@ -14,12 +21,21 @@ class Subsite(models.Model):
 
     ideas_per_page = models.IntegerField(default=10)
     allow_anonymous_ideas = models.BooleanField(default=False)
+    post_status = models.IntegerField(default=ALLOW_ALL, choices=SUBSITE_POST_STATUS)
 
     def __unicode__(self):
         return self.name
 
     def get_absolute_url(self):
         return reverse('subsite', args=[self.slug])
+
+    def user_can_post(self, user):
+        if self.post_status == DISALLOW_ALL:
+            return False
+        elif self.post_status == ALLOW_ALL:
+            return True
+        elif self.post_status == REQUIRE_LOGIN:
+            return not user.is_anonymous()
 
 class Idea(models.Model):
 
