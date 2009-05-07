@@ -20,7 +20,6 @@ class Subsite(models.Model):
     theme = models.CharField(help_text='name of base theme template', max_length=100)
 
     ideas_per_page = models.IntegerField(default=10)
-    allow_anonymous_ideas = models.BooleanField(default=False)
     post_status = models.IntegerField(default=ALLOW_ALL, choices=SUBSITE_POST_STATUS)
 
     def __unicode__(self):
