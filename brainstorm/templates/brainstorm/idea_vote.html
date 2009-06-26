@@ -11,5 +11,5 @@
         <h3><a href="{{idea.get_absolute_url}}">{{idea.title}}</a></h3>
         <div class="commentMeta">Submitted on {{idea.submit_date|date:"m/d P"}} by {{idea.user|default_if_none:"anonymous"}} (<a href="{{idea.get_absolute_url}}#comments">{{idea.comments.count}} comments</a>)</div>
         
-        <p>{{idea.description|urlize}}</p>
+        <p>{{idea.description|removetags:"script object img iframe"|safe}}</p>
     </div>
