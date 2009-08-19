@@ -9,7 +9,7 @@ from django.views.generic import list_detail
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-from anthill.ideas.models import Subsite, Idea, Vote
+from brainstorm.models import Subsite, Idea, Vote
 
 def idea_list(request, slug, ordering='-total_upvotes'):
     ordering_db = {'most_popular': '-score',

@@ -1,9 +1,10 @@
 from django.conf.urls.defaults import *
+from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from brainstorm.models import Idea
 from brainstorm.feeds import SubsiteFeed
 
-BRAINSTORM_USE_SECRETBALLOT = False
+BRAINSTORM_USE_SECRETBALLOT = getattr(settings, 'BRAINSTORM_USE_SECRETBALLOT', False)
 
 feeds = {
     'latest': SubsiteFeed,
