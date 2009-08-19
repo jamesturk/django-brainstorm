@@ -14,14 +14,15 @@ from brainstorm.models import Subsite, Idea, Vote
 def idea_list(request, slug, ordering='-total_upvotes'):
     ordering_db = {'most_popular': '-score',
                    'latest': '-submit_date'}[ordering]
-    return list_detail.object_list(request,
-        queryset=Idea.objects.filter(subsite__slug=slug).with_user_vote(request.user).select_related().order_by(ordering_db),
+    qs = Idea.objects.with_user_vote(request.user).filter(subsite__slug=slug).select_related().order_by(ordering_db)
+    #print qs
+    return list_detail.object_list(request, queryset=qs,
         extra_context={'ordering': ordering, 'subsite':slug}, paginate_by=10,
         template_object_name='idea')
 
 def idea_detail(request, slug, id):
     idea = get_object_or_404(Idea.objects.with_user_vote(request.user), pk=id, subsite__slug=slug)
-    return render_to_response('ideas/idea_detail.html',
+    return render_to_response('brainstorm/idea_detail.html',
                               {'idea': idea},
                               context_instance=RequestContext(request))
 

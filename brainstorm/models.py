@@ -60,7 +60,7 @@ class Idea(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('idea', args=[self.subsite_id, self.id])
+        return reverse('idea_detail', args=[self.subsite_id, self.id])
 
 class Vote(models.Model):
     user = models.ForeignKey(User, related_name='idea_votes')
