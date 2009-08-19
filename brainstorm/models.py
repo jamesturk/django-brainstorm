@@ -39,7 +39,7 @@ class Subsite(models.Model):
 class IdeaManager(models.Manager):
 
     def with_user_vote(self, user):
-        return self.extra(select={'user_vote':'SELECT value FROM brainstorm_vote WHERE idea_id=ideas_idea.id AND user_id=%s'}, select_params=[user.id])
+        return self.extra(select={'user_vote':'SELECT value FROM brainstorm_vote WHERE idea_id=brainstorm_idea.id AND user_id=%s'}, select_params=[user.id])
 
 class Idea(models.Model):
 
