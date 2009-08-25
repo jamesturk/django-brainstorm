@@ -15,7 +15,8 @@ def idea_list(request, slug, ordering='-total_upvotes'):
     ordering_db = {'most_popular': '-score',
                    'latest': '-submit_date'}[ordering]
     qs = Idea.objects.with_user_vote(request.user).filter(subsite__slug=slug).select_related().order_by(ordering_db)
-    #print qs
+    if hasattr(qs, '_gatekeeper'):
+        qs = qs.approved()
     return list_detail.object_list(request, queryset=qs,
         extra_context={'ordering': ordering, 'subsite':slug}, paginate_by=10,
         template_object_name='idea')
