@@ -26,7 +26,7 @@ class Subsite(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('subsite', args=[self.slug])
+        return reverse('ideas_popular', args=[self.slug])
 
     def user_can_post(self, user):
         if self.post_status == DISALLOW_ALL:
