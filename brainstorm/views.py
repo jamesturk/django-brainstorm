@@ -31,9 +31,11 @@ def idea_detail(request, slug, id):
 def new_idea(request, slug):
     subsite = get_object_or_404(Subsite, pk=slug)
     if not subsite.user_can_post(request.user):
-        return HttpResponseRedirect(subsite.get_absolute_url())
+        return redirect(subsite.get_absolute_url())
     title = request.POST['title']
     description = request.POST['description']
+    if not title.strip() or not description.strip():
+        return redirect(subsite.get_absolute_url())
     user = request.user
     idea = Idea.objects.create(title=title, description=description, user=user,
                                subsite=subsite)
