@@ -4,7 +4,7 @@ django-brainstorm
 
 Django app for creating a site with multiple areas to brainstorm ideas.
 
-This app powers http://feedback.sunlightfoundation.com/hackathon/ and http://feedback.sunlightfoundation.com/oogl/ and makes it easy to create any number of these 'subsites.'
+This app powers http://sunlightlabs.com/ideas/ and other similar sites.
 
 django-brainstorm is a project of Sunlight Labs (c) 2009.
 Written by James Turk <jturk@sunlightfoundation.com>.

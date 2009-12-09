@@ -1,0 +1,14 @@
+0.2.1 - December 9 2009
+=======================
+    - disallow submission of empty ideas
+    - fix a packaging bug
+
+0.2.0 - August 25 2009
+======================
+    - rewrite for Sunlight Labs website
+    - reduced a few extra queries
+    - integrate with django-gatekeeper if installed
+
+0.1.0 - May 27 2009
+=====
+    - initial working release, focused on subsites

@@ -4,7 +4,7 @@ long_description = open('README.rst').read()
 
 setup(
     name='django-brainstorm',
-    version="0.2.0",
+    version="0.2.1",
     package_dir={'brainstorm': 'brainstorm'},
     packages=['brainstorm'],
     package_data={'brainstorm': ['templates/brainstorm/*.html']},
