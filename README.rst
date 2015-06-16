@@ -4,21 +4,14 @@ django-brainstorm
 
 Django app for creating a site with multiple areas to brainstorm ideas.
 
-This app is no longer used/supported at Sunlight.
-
-django-brainstorm is a project of Sunlight Labs (c) 2009.
-Written by James Turk <jturk@sunlightfoundation.com>.
-
-All code is under a BSD-style license, see LICENSE for details.
-
-Source: http://github.com/sunlightlabs/django-brainstorm/
+Source: http://github.com/jamesturk/django-brainstorm/
 
 
 Requirements
 ============
 
-python >= 2.4
-django >= 1.0
+* python >= 2.4
+* django >= 1.0
 
 Usage
 =====
